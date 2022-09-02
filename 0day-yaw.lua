@@ -182,8 +182,8 @@ uiupdate()
 menu.add_callback(aimantin, function()
     uiupdate()
 end)
-local invert = false
-local finvert = false
+local switch = false
+local fswitch = false
 local Animationdestruction = function(ctx)
     local choked = engine.get_choked_commands()
     if choked == 0 then
@@ -221,10 +221,10 @@ local Animationdestruction = function(ctx)
     if yawAddMode[state]:get()==1 then
         yawAddValue=yawAdd[state]:get()
     elseif yawAddMode[state]:get()==2 then
-        local side = invert and -1 or 1
+        local side = switch and -1 or 1
         local jitter = jitter[state]:get() / 2 * side
         yawAddValue=(yawAdd[state]:get() + jitter)
-        invert = not invert
+        switch = not switch
     elseif yawAddMode[state]:get()==3 then
         yawAddValue=trueRandom(-(math.abs(jitter[state]:get())),math.abs(jitter[state]:get()))
     end
@@ -233,8 +233,8 @@ local Animationdestruction = function(ctx)
     if fakelagMode[state]:get()==1 then
         fakelagValue=fakelag[state]:get()
     elseif fakelagMode[state]:get()==2 then
-        fakelagValue=finvert and fakelagmin[state]:get() or fakelagmax[state]:get()
-        finvert = not finvert
+        fakelagValue=fswitch and fakelagmin[state]:get() or fakelagmax[state]:get()
+        fswitch = not fswitch
     elseif fakelagMode[state]:get()==3 then
         fakelagValue=trueRandom(fakelagmin[state]:get(),fakelagmax[state]:get())
     end
